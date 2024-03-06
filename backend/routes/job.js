@@ -33,6 +33,7 @@ router.get('/getall', async (req, res) => {
     }
 });
 
+// Route to post a new job 
 router.post('/post', authMiddleware, async(req,res)=>{
        const { success } =jobpostSchema.safeParse(req.body);
        if(!success){
@@ -47,8 +48,17 @@ router.post('/post', authMiddleware, async(req,res)=>{
          }
          const role =existuser.role;
              if(role!='Employer'){
-                return res.status(411).json({msg:"user cannot acces this feature"});
+                return res.status(411).json({msg:"You cannot acces this feature"});
              }
+             
+               const{salaryfrom,salaryto ,fixedsalary}=req.body;
+               if((!salaryto || !salaryfrom) && !fixedsalary){
+                  res.status(411).json({msg:"Please either provide a fixed salary or ranged salary"})
+               }
+               if((salaryto && salaryfrom) && fixedsalary){
+                res.status(411).json({msg:"Cannot enter both the fixed salary and ranged salary together"})
+               }
+
        const newjob = await Job.create({
            title:req.body.title,
            description:req.body.description,
@@ -63,12 +73,29 @@ router.post('/post', authMiddleware, async(req,res)=>{
           jobpostedon:req.body.jobpostedon,
          jobpostedby:req.body.jobpostedby
        })
-        res.status(201).json({msg:"Job posted successfully"})
+        res.status(201).json({msg:"Job posted successfully",data:newjob})
         } catch (error) {
             console.error(error);
              res.status(411).json({msg:"something went wrong"})
         }
 })
+
+// To get a posted job of a particular employer
+router.get('/myposts',authMiddleware , async(req,res)=>{
+    try {
+        const userId = req.userId ;
+        const { role }  =await User.findById({_id:userId});
+
+         if(role!='Employer'){
+          return res.status(411).json({msg:"you are not allowed to access"})
+        }
+      const myjobs=await Job.find({jobpostedby: userId});
+      res.status(200).json({success:true , data:myjobs})
+    } catch (error) {
+        res.status(411).json({msg:"Something went wrong"})
+    }
+})
+
 
 
 module.exports=router;
