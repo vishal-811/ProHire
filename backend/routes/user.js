@@ -5,7 +5,6 @@ const jwt =require('jsonwebtoken');
 const { z } = require('zod');
 const { User } = require('../database');
 const { authMiddleware } = require('../middleware/auth');
-const sendmail =require('sendmail');
 const router =express.Router();
 
 const signupSchema =z.object({
@@ -25,12 +24,12 @@ const signinSchema =z.object({
 router.post('/signup' , async(req,res)=>{
      const { success } =signupSchema.safeParse(req.body);
      if(!success){
-        res.status(411).json({msg:"Invalid inputs"});
+       return res.status(411).json({msg:"Invalid inputs"});
      } 
 
      const alreadyexist = await User.findOne({email:req.body.email});
      if(alreadyexist){
-        res.status(411).json({msg:"User already exist with this credentials"})
+       return res.status(411).json({msg:"User already exist with this credentials"})
      }
          try {
             const password =req.body.password;

@@ -5,7 +5,7 @@ const { User }  =require('../database/index')
 const authMiddleware =async(req,res,next)=>{
      try {
         const authHeader =req.headers.authorization;
-     if(!authHeader || !authHeader.startswith('Bearer')){
+     if(!authHeader || !authHeader.startsWith('Bearer')){
         res.status(401).json({msg:"Please login to acces this page"});
      }
      const token  = authHeader.split(' ')[1];
@@ -13,9 +13,10 @@ const authMiddleware =async(req,res,next)=>{
      if(!decoded){
         res.status(411).json({msg:"Invalid token"})
      }
-     req.user = await User.findById(decoded.id);
+     req.userId = decoded.userId;
      next();
      } catch (error) {
+        console.error(error);
         res.status(411).json({msg:"verification failed"});
      }
 

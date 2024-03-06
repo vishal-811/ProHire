@@ -1,5 +1,6 @@
 require('dotenv').config();
 const mongoose =require('mongoose');
+const { boolean } = require('zod');
 mongoose.connect(process.env.MONGO_URL);
 
 const userSchema = new mongoose.Schema({
@@ -25,14 +26,65 @@ const userSchema = new mongoose.Schema({
 },{
     timestamps:true
 })
-
+ 
+const jobSchema =new mongoose.Schema({
+    title:{
+        type:String,
+        required:[true,"Title for job is required"]
+    },
+    description:{
+        type:String,
+        required:[true ,"Job description is required"]
+    },
+    category:{
+         type:String,
+         required:[true,"Please provide the category of job"]
+    },
+    country:{
+        type:String,
+        required:[true , "Job country is required"]
+    },
+    city:{
+        type:String,
+        required:[true,"Job city is required"]
+    },
+    pincode:{
+        type:Number,
+        required:[true,"Exact Job location is required"]
+    },
+    fixedsalary:{
+        type:Number,
+        minLength:[4,"Minimum 4 digit salary"]
+    },
+    salaryfrom:{
+        type:Number,
+        minLength:[4,"Minimum 4  digit salary"]
+    },
+    salaryto:{
+        type:Number,
+        minLength:[4,"minimum 4 digit salary"]
+    },
+    expired:{
+        type:Boolean,
+        default:false
+    },
+    jobpostedon:{
+        type:Date,
+        default:Date.now()
+    },
+    jobpostedby:{
+        type:mongoose.Schema.ObjectId,
+        ref:"User",
+        required:true
+    }
+})
 
 const User =mongoose.model('User' , userSchema);
-// const Job =mongoose.model('Job' , jobSchema);
+const Job =mongoose.model('Job' , jobSchema);
 // const Appliaction =mongoose.model('Application' , applicationSchema);
 
 module.exports={
     User,
-    // Job,
+    Job,
     // Appliaction
 }
