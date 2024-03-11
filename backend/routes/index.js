@@ -6,7 +6,7 @@ const router =express.Router();
 
 router.use('/user',userRouter);
 router.use('/job',jobRouter);
-router.use('/appliaction', applicationRouter);
+router.use('/application', applicationRouter);
 
 
 module.exports =router;

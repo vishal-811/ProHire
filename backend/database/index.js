@@ -115,15 +115,19 @@ const jobSchema =new mongoose.Schema({
           }
        },
        employerId:{
-         type:mongoose.Schema.Types.ObjectId,
-         ref:"Job",
-         required:true
-       },
+         user:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"Job",
+            required:true
+         },
        role:{
          type:String,
          enum:["employer"],
          required:true
        }
+    },
+  },{
+    timestamps:true
   })
 
 const User =mongoose.model('User' , userSchema);
