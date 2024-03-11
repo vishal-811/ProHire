@@ -79,12 +79,59 @@ const jobSchema =new mongoose.Schema({
     }
 })
 
+  const applicationSchema = new mongoose.Schema({
+       username:{
+          type:String,
+          required:[true,"username is required"]
+       },
+       email:{
+          type:String,
+          required:[true,"email is required"]
+       },
+       coverletter:{
+          type:String,
+          required:[true,"Please provide a cover letter"]
+       },
+       resume:{
+          public_id:{
+            type:String,
+            required:true
+          },
+         url:{
+            type:String,
+            required:true
+         }
+       },
+       applicantId:{
+          user:{
+             type:mongoose.Schema.Types.ObjectId,
+             ref:"User",
+             required:true
+          },
+          role:{
+             type:String,
+             enum:["Job seeker"],
+             required:true
+          }
+       },
+       employerId:{
+         type:mongoose.Schema.Types.ObjectId,
+         ref:"Job",
+         required:true
+       },
+       role:{
+         type:String,
+         enum:["employer"],
+         required:true
+       }
+  })
+
 const User =mongoose.model('User' , userSchema);
 const Job =mongoose.model('Job' , jobSchema);
-// const Appliaction =mongoose.model('Application' , applicationSchema);
+const Application =mongoose.model('Application' , applicationSchema);
 
 module.exports={
     User,
     Job,
-    // Appliaction
+    Application
 }
