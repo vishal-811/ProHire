@@ -122,7 +122,7 @@ const jobSchema =new mongoose.Schema({
          },
        role:{
          type:String,
-         enum:["employer"],
+         enum:["Employer"],
          required:true
        }
     },
