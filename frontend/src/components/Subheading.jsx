@@ -1,7 +1,7 @@
 
 const  Subheading=({label})=>{
     return (
-        <div>
+        <div className="text-gray-500 font-medium pt-1 px-4 pb-4">
               {label}
         </div>
     )
