@@ -57,21 +57,21 @@ router.post('/signup' , async(req,res)=>{
 router.post('/signin' , async(req,res)=>{
      const { success } = signinSchema.safeParse(req.body);
      if(!success){
-        res.status(411).json({msg:"Inavlid inputs"})
+       return  res.status(411).json({msg:"Inavlid inputs"})
      }
      const user =await User.findOne({email:req.body.email});
      if(!user){
-        res.status(411).json({msg:"user doesn't exist with this credentials, Please Signup!"})
+       return res.status(411).json({msg:"user doesn't exist with this credentials, Please Signup!"})
      }
 
      const password =user.password;
      const verifyPass =await bcrypt.compare(req.body.password,password)
      if(!verifyPass){
-        res.status(411).json({msg:"Wrong password"});
+       return res.status(411).json({msg:"Wrong password"});
      }
      const role =user.role;
      if(req.body.role!=role){
-        res.status(411).json({msg:"Role doesn't match"})
+       return  res.status(411).json({msg:"Role doesn't match"})
      }
         const userId =user._id;
         const token =jwt.sign({userId},process.env.JWT_SECRET);
@@ -80,7 +80,7 @@ router.post('/signin' , async(req,res)=>{
 
 // logout functionality handle on frontend.
 router.get('/logout',authMiddleware ,(req,res)=>{
-       res.status(200).json({success:true,msg:"logout successfully"});
+    return  res.status(200).json({success:true,msg:"logout successfully"});
 })
 
 

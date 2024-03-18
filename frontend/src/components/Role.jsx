@@ -33,7 +33,7 @@ const RoleSelector =({onchange})=>{
                     boxShadow: isHovered ? '0 0 0 1px rgba(59, 130, 246, 0.5), 0 0 0 3px rgba(59, 130, 246, 0.3)' : 'none',
                 }}
             >
-                <option value="Job Seeker">Job Seeker</option>
+                <option value="Job seeker">Job Seeker</option>
                 <option value="Employer">Employer</option>
             </select>
     </div>

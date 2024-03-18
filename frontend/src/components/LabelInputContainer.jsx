@@ -20,6 +20,7 @@ const LabelInputContainer = ({ label, placeholder, onchange }) => {
                 {label}
             </div>
             <input
+                onChange={onchange}
                 placeholder={placeholder}
                 className={`w-full px-2 py-1 border rounded border-slate-200 
                             ${isFocused ? 'focus:border-slate-500 focus:ring focus:ring-slate-300' : 'focus:border-blue-500 focus:ring focus:ring-blue-300'}
