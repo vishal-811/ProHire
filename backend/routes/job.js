@@ -4,20 +4,20 @@ const { authMiddleware } = require('../middleware/auth');
 const { z } =require('zod');
 const router =express.Router();
 
-// const jobpostSchema=z.object({
-//       title:z.string(),
-//       description:z.string(),
-//       category:z.string(),
-//       country:z.string(),
-//       city:z.string(),
-//       pincode:z.number(),
-//       expired:z.boolean(),
-//       fixedsalary:z.number().optional(),
-//       salaryfrom:z.number().optional(),
-//       salaryto:z.number().optional(),
-//       jobpostedon:z.string().optional(),
-//       jobpostedby:z.string(),
-// })
+// const jobpostSchema = z.object({
+//   title: z.string(),
+//   description: z.string(),
+//   category: z.string(),
+//   country: z.string(),
+//   city: z.string(),
+//   pincode: z.number(),
+  // fixedsalary:z.union([z.number().min(4)])
+  // .optional()
+  // .transform(e => e === "" ? undefined : e)
+  // salaryfrom: z.number().min(4).optional().nullable(),
+  // salaryto: z.number().min(4).optional().nullable(),
+// });
+
 router.get('/getall', async (req, res) => {
     try {
         const jobs = await Job.find({ expired: false });
@@ -59,6 +59,16 @@ router.post('/post', authMiddleware, async(req,res)=>{
               else if((salaryto && salaryfrom) && fixedsalary){
                 return  res.status(411).json({msg:"Cannot enter both the fixed salary and ranged salary together"})
                }
+               else if(fixedsalary){
+                     if(fixedsalary<1000){
+                        return res.status(411).json({msg:"fixed salary must be greater than or qual to 1000"})
+                     }
+               }
+               else if(salaryto && salaryfrom){
+                  if(salaryto <1000 || salaryfrom<1000){
+                    return res.status(411).json({msg:"Ranged salary must be greater than or qual to 1000"})
+                  }
+               }
 
        const newjob = await Job.create({
            title:req.body.title,
@@ -66,13 +76,13 @@ router.post('/post', authMiddleware, async(req,res)=>{
            category:req.body.category,
            country:req.body.country,
            city:req.body.city,
-           pincode:req.body.pincode,
+           pincode:Number(req.body.pincode),
            expired:req.body.expired,
            fixedsalary:req.body.fixedsalary,
            salaryfrom:req.body.salaryfrom,
           salaryto:req.body.salaryto,
-          jobpostedon:req.body.jobpostedon,
-         jobpostedby:req.body.jobpostedby
+          jobpostedon:new Date(),
+         jobpostedby:userId
        })
         res.status(201).json({msg:"Job posted successfully",data:newjob})
         } catch (error) {

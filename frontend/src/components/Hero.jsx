@@ -1,10 +1,10 @@
-import Navbar from './Navbar'; 
+
 import Herologo from '../assets/Herologo.jpg';
 
 const Hero = () => {
     return (
         <>
-            <Navbar />
+
             <div className="bg-black h-screen flex justify-between pt-24 select-none"> 
                 {/* Left section */}
                 <div className="w-1/2 text-white px-10">
@@ -14,10 +14,10 @@ const Hero = () => {
                         Join us and unlock the door to your professional success.
                     </p>
                     <button className="mt-8 py-3 px-6 bg-green-500 hover:bg-green-600 text-white text-lg font-semibold rounded-md shadow-md transition duration-300 ease-in-out flex items-center">
-    Learn More
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-        <path fillRule="evenodd" d="M13.707 9.293a1 1 0 00-1.414-1.414L10 10.586 7.707 8.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00.001-.001z" clipRule="evenodd" />
-    </svg>
+                   Learn More
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M13.707 9.293a1 1 0 00-1.414-1.414L10 10.586 7.707 8.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00.001-.001z" clipRule="evenodd" />
+                  </svg>
 </button>
 
                 </div>
@@ -27,7 +27,7 @@ const Hero = () => {
                 <img 
                  src={Herologo} 
                  alt="ProHire Logo" 
-                className='rounded-md shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out w-2/3 ms-48'
+                className=' border-2 solid border-gray-300  rounded-md shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out w-2/3 ms-48'
                 style={{
                    transform: 'rotate(5deg)', // Apply a slight tilt effect
                }}

@@ -48,6 +48,7 @@ const Signup = () => {
             }
         } catch (error) {
             console.error("Signup error:", error);
+            toast.error(error.response.data.msg)
         }
         setIsLoading(false); // Set loading state to false when signup finishes
     };

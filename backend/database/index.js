@@ -70,7 +70,7 @@ const jobSchema =new mongoose.Schema({
     },
     jobpostedon:{
         type:Date,
-        default:Date.now()
+        default:new Date()
     },
     jobpostedby:{
         type:mongoose.Schema.ObjectId,
