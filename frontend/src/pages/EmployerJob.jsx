@@ -31,7 +31,7 @@ const EmployerJob = () => {
     }, [token]);
 
     const colors = ['#e3dbfa', '#fbe2f4', '#ffe1cc', '#d4f6ed', '#eceff4', '#dff3fe'];
-
+          
     const handleGoBack = () => {
         navigate('/');
     };
