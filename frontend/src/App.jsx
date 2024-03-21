@@ -8,6 +8,7 @@ import NotFound from './components/NotFound'
 import PostJob from "./pages/PostJob";
 import EmployerJob from "./pages/EmployerJob";
 import AllJob from './pages/AllJob';
+import JobCard from "./components/JobCard";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
          <Route path='/postjob' element={<PostJob/>}/>
          <Route path="/myposts" element={<EmployerJob/>}/>
           <Route path="/alljobs" element={<AllJob/>}/>
+          <Route path="/card" element={<JobCard/>}/>
          <Route path="/*" element={<NotFound/>}/>
      </Routes>   
    </BrowserRouter>

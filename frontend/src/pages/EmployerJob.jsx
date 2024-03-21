@@ -1,4 +1,3 @@
-// EmployerJob.js
 
 import axios from 'axios';
 import { useState, useEffect } from 'react';
@@ -20,8 +19,9 @@ const EmployerJob = () => {
         .then(response => {
             console.log(response.data);
             if (response.data.success) {
-                setJobs(response.data.data);
+                console.log(response.data.data)
                 toast.success('Your Jobs');
+                setJobs(response.data.data);
             }
         })
         .catch(error => {
@@ -30,34 +30,49 @@ const EmployerJob = () => {
         });
     }, [token]);
 
-    const colors = ['#e3dbfa', '#fbe2f4', '#ffe1cc', '#d4f6ed', '#eceff4', '#dff3fe'];
-          
+    const colors = ['#ceb7f1', '#f4cbea', '#ffbfa5', '#a7edd9', '#d5dae3', '#c0e7fd', '#c9b0eb', '#e7b1df', '#ffb09d', '#a5dbcf'];
+
     const handleGoBack = () => {
         navigate('/');
     };
-
+     
     return (
-        <div className='flex flex-col  justify-center px-4 py-8 bg-gray-100 min-h-screen'>
-            <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">Your Posted Jobs</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-6xl">
-                {jobs.map((job, index) => (
-                    <div key={index}>
-                        <JobCard
-                            title={job.title}
-                            description={job.description}
-                            country={job.country}
-                            postedon={job.jobpostedon}
-                            salary={job.fixedsalary || job.salaryfrom}
-                            color={colors[Math.floor(Math.random() * colors.length)]}
-                        />
+        <div className='flex flex-col justify-center bg-gray-100 min-h-screen'>
+            <h2 className="text-7xl font-bold text-center text-blue-800">
+                Your Posted Jobs
+            </h2>
+    
+            <div className="max-w-6xl flex justify-center pt-24 pb-12">
+                {jobs.length !== 0 ? (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                        {jobs.map((job, index) => (
+                            <div key={index}>
+                                <JobCard
+                                    title={job.title}
+                                    description={job.description}
+                                    country={job.country}
+                                    postedon={job.jobpostedon}
+                                    salary={job.fixedsalary || job.salaryfrom}
+                                    color={colors[Math.floor(Math.random() * colors.length)]}
+                                />
+                            </div>
+                        ))}
                     </div>
-                ))}
+                ) : (
+                    <div className="flex flex-col ms-96 justify-center items-center text-gray-800">
+                        <p className="text-5xl font-semibold text-red-400">No jobs found...</p>
+                    </div>
+                )}
             </div>
+    
             <button className="mt-8 bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-md shadow-md transition-colors duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50" onClick={handleGoBack}>
                 Go Back to Home
             </button>
         </div>
     );
+    
+    
+    
 }
 
 export default EmployerJob;
