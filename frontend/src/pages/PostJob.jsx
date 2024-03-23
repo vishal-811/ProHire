@@ -78,22 +78,20 @@ import axios from 'axios'
             toast.error(error.response.data.msg) 
         }
   };
-
   return (
-    <div className="flex justify-center items-center h-screen bg-gradient-to-b from-purple-600 to-indigo-800">
+    <div className="flex justify-center items-center bg-slate-700">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-        <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">
-          Post a Job
-        </h1>
-
-        <LabelInputContainer label={"Title"} onchange={(e)=>{setTitle(e.target.value)}} />
-        <LabelInputContainer label={"Description"} onchange={(e)=>{setDescription(e.target.value)}} />
-        <LabelInputContainer label={"Category"} onchange={(e)=>{setCategory(e.target.value)}} />
-        <LabelInputContainer label={"Country"} onchange={(e)=>{setCountry(e.target.value)}} />
-        <LabelInputContainer label={"City"}  onchange={(e)=>{setCity(e.target.value)}}/>
-        <LabelInputContainer label={"Pincode"}  onchnage={(e)=>{setPincode(e.target.value)}}/>
-
-        <div className="salary_wrapper flex flex-col items-center space-y-4 bg-gray-100 rounded-lg p-4">
+        <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Post a Job</h1>
+  
+        <div className="space-y-4">
+          <LabelInputContainer label={"Title"} onchange={(e)=>{setTitle(e.target.value)}} />
+          <LabelInputContainer label={"Category"} onchange={(e)=>{setCategory(e.target.value)}} />
+          <LabelInputContainer label={"Country"} onchange={(e)=>{setCountry(e.target.value)}} />
+          <LabelInputContainer label={"City"}  onchange={(e)=>{setCity(e.target.value)}}/>
+          <LabelInputContainer label={"Pincode"}  onchange={(e)=>{setPincode(e.target.value)}}/>
+        </div>
+  
+        <div className="flex flex-col space-y-4 mt-6">
           <select
             className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-purple-500 transition duration-300"
             value={salaryType}
@@ -103,12 +101,12 @@ import axios from 'axios'
             <option value="Fixed Salary">Fixed Salary</option>
             <option value="Ranged Salary">Ranged Salary</option>
           </select>
-
+  
           {(salaryType === "Fixed Salary" || salaryType === "Ranged Salary") && (
-            <div className="flex space-x-4">
+            <div className="flex flex-wrap space-x-4">
               {salaryType === "Fixed Salary" ? (
                 <input
-                  className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-purple-500 transition duration-300"
+                  className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-purple-500 transition duration-300 w-full"
                   type="number"
                   placeholder="Enter Fixed Salary"
                   value={fixedSalary}
@@ -117,7 +115,7 @@ import axios from 'axios'
               ) : (
                 <>
                   <input
-                    className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-purple-500 transition duration-300"
+                    className="border border-gray-300 rounded-md ms-4 mb-2 px-4 py-2 focus:outline-none focus:border-purple-500 transition duration-300"
                     type="number"
                     placeholder="Salary From"
                     value={salaryFrom}
@@ -134,19 +132,30 @@ import axios from 'axios'
               )}
             </div>
           )}
-
+  
           {salaryType === "default" && (
             <p className="text-red-500">Please provide Salary Type *</p>
           )}
-
+  
+          <textarea
+            rows="6"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:border-purple-500 transition duration-300"
+            placeholder="Job Description"
+          />
+  
           <Button
             label={submitting ? "Please wait..." : "Submit"}
             onclick={handleSubmit}
+            className="bg-purple-600 text-white rounded-md px-4 py-2 hover:bg-purple-700 transition duration-300"
           />
         </div>
       </div>
     </div>
   );
+  
+  
 };
 
 export default PostJob;

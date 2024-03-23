@@ -1,6 +1,6 @@
 // JobCard.js
 
-const JobCard = ({ title, description, postedon, salary, country, color }) => {
+const JobCard = ({title, category, postedon, salary, country, color }) => {
     // Convert postedon to a Date object
     const postedonDate = new Date(postedon);
 
@@ -17,7 +17,7 @@ const JobCard = ({ title, description, postedon, salary, country, color }) => {
                     <p className="text-sm font-semibold">{formattedDate}</p>
                 </div>
                 <p className="mt-16 ms-3 text-lg font-medium">{title}</p>
-                <p className="ms-3 flex flex-wrap text-3xl font-semibold">{description}</p>
+                <p className="ms-3 flex flex-wrap text-3xl font-semibold">{category}</p>
                 <ul className="flex flex-wrap text-xs space-x-4 ms-3 mt-7">
                     <li className="border border-gray-500 rounded-md px-4 py-1">Internship</li>
                     <li className="border border-gray-500 rounded-md px-4 py-1">Full time</li>

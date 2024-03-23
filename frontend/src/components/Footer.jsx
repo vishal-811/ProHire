@@ -1,3 +1,4 @@
+ import { Link } from "react-router-dom";
 const Footer = () => {
     return (
         <div className="bg-black flex justify-between select-none flex-col">
@@ -9,9 +10,9 @@ const Footer = () => {
 
                 <div className="me-24 mt-24 space-y-20">
                     <p className="text-3xl text-gray-400">What are you waiting for? let's make your <br/> dream come true with us. We will make it easier <br/> for you to find your dream job!</p>
-                    <button className="mt-8 py-3 px-6 bg-white hover:bg-gray-200 text-gray-600 text-lg font-semibold rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-gray-400 flex items-center">
+                    <Link to={'/alljobs'} className=" w-40 ps-10 mt-8 py-3 px-6 bg-white hover:bg-gray-200 text-gray-600 text-lg font-semibold rounded-full shadow-md transition duration-300 ease-in-out focus:outline-none focus:ring focus:ring-gray-400 flex items-center">
                         Let's Start
-                    </button>
+                    </Link>
                 </div>
             </div>
               
