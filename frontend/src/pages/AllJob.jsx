@@ -45,6 +45,7 @@ const AllJob=()=>{
                                         postedon={job.jobpostedon}
                                         salary={job.fixedsalary || job.salaryfrom}
                                         color={colors[Math.floor(Math.random() * colors.length)]}
+                                        jobid={job._id}
                                     />
                                 </div>
                             ))}

@@ -162,7 +162,6 @@ router.delete('/delete/:id', authMiddleware, async (req, res) => {
 // get single job
 router.get('/:id',authMiddleware , async(req,res)=>{
      const id =req.params.id;
-
     try {
       const job = await Job.findById(id);
       if(!job){
@@ -170,6 +169,7 @@ router.get('/:id',authMiddleware , async(req,res)=>{
       }
       res.status(200).json({success:"true" , data:job});
     } catch (error) {
+      console.log(error);
         res.status(411).json({msg:"something went wrong"})
     }
 })

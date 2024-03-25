@@ -13,10 +13,10 @@ const Navbar = () => {
     }
 
     return (
-        <div className="bg-black h-16 flex items-center px-6">
+        <div className="bg-black h-16 flex items-center px-6 ">
             <div className="flex items-center">
                 <a href="/">
-                    <img
+                    <img 
                         src={logo}
                         alt="job-logo"
                         className="w-36 h-12 mr-2 select-none cursor-pointer rounded-md shadow-md hover:shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"

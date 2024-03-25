@@ -49,7 +49,7 @@ const EmployerJob = () => {
                             <div key={index}>
                                 <JobCard
                                     title={job.title}
-                                    description={job.description}
+                                    category={job.category}
                                     country={job.country}
                                     postedon={job.jobpostedon}
                                     salary={job.fixedsalary || job.salaryfrom}

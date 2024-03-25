@@ -1,5 +1,6 @@
 import HomeCard from "./HomeCard";
 import Signuplogo from '../assets/Signuplogo.png'
+import findjob from '../assets/findjob.png'
 
 const Apply=()=>{
     return (
@@ -17,7 +18,7 @@ const Apply=()=>{
                    </div> 
 
                    <div className="space-y-5">
-                      <HomeCard/>
+                      <HomeCard img={findjob}/>
                       <p className="text-gray-400 text-xl">Step 2</p>
                       <p className="text-2xl text-black font-semibold">Find A Job To Your Liking.</p>
                       <p className="text-xl text-gray-400">Find the job you want.Then a number of 

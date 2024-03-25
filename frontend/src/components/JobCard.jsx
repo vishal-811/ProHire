@@ -1,6 +1,6 @@
-// JobCard.js
+import { useNavigate } from "react-router-dom";
 
-const JobCard = ({title, category, postedon, salary, country, color }) => {
+const JobCard = ({title, category, postedon, salary, country, color , jobid }) => {
     // Convert postedon to a Date object
     const postedonDate = new Date(postedon);
 
@@ -9,6 +9,13 @@ const JobCard = ({title, category, postedon, salary, country, color }) => {
 
     // Format the date as MM/DD/YYYY
     const formattedDate = postedonDate.toLocaleDateString(undefined, options);
+     
+    const navigate = useNavigate();
+
+    function handledetails() {
+        navigate(`/jobdetails/${jobid}`);
+    }
+    
 
     return (
         <div className="flex mb-24  ms-52  border-2 solid border-gray-400 w-80 h-96 rounded-xl relative cursor-pointer overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 bg-white">
@@ -29,7 +36,7 @@ const JobCard = ({title, category, postedon, salary, country, color }) => {
                     <p className="mt-4 text-2xl font-semibold text-black">{country}</p>
                 </div>
                 <div>
-                    <button className="bg-black text-white px-4 py-2 rounded-md text-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors duration-300 ease-in-out">
+                    <button onClick={handledetails} className="bg-black text-white px-4 py-2 rounded-md text-sm hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition-colors duration-300 ease-in-out">
                         Details
                     </button>
                 </div>

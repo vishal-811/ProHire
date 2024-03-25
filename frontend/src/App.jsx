@@ -9,6 +9,7 @@ import PostJob from "./pages/PostJob";
 import EmployerJob from "./pages/EmployerJob";
 import AllJob from './pages/AllJob';
 import JobCard from "./components/JobCard";
+import JobDetails from "./pages/JobDetails";
 
 function App() {
   return (
@@ -22,7 +23,8 @@ function App() {
          <Route path="/myposts" element={<EmployerJob/>}/>
           <Route path="/alljobs" element={<AllJob/>}/>
           <Route path="/card" element={<JobCard/>}/>
-         <Route path="/*" element={<NotFound/>}/>
+          <Route path="/jobdetails/:id" element={<JobDetails/>}/>
+         <Route path="*" element={<NotFound/>}/>
      </Routes>   
    </BrowserRouter>
    <ToastContainer
