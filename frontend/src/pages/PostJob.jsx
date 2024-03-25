@@ -84,7 +84,7 @@ import axios from 'axios'
         <h1 className="text-4xl font-bold text-gray-800 mb-6 text-center">Post a Job</h1>
   
         <div className="space-y-4">
-          <LabelInputContainer label={"Title"} onchange={(e)=>{setTitle(e.target.value)}} />
+          <LabelInputContainer label={"Title / Company Name"} onchange={(e)=>{setTitle(e.target.value)}} />
           <LabelInputContainer label={"Category"} onchange={(e)=>{setCategory(e.target.value)}} />
           <LabelInputContainer label={"Country"} onchange={(e)=>{setCountry(e.target.value)}} />
           <LabelInputContainer label={"City"}  onchange={(e)=>{setCity(e.target.value)}}/>

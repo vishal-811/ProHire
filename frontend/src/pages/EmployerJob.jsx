@@ -53,6 +53,7 @@ const EmployerJob = () => {
                                     country={job.country}
                                     postedon={job.jobpostedon}
                                     salary={job.fixedsalary || job.salaryfrom}
+                                    jobid={job._id}
                                     color={colors[Math.floor(Math.random() * colors.length)]}
                                 />
                             </div>
