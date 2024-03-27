@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,useNavigate } from "react-router-dom";
 import axios from 'axios';
 import { toast } from "react-toastify";
 
@@ -9,6 +9,8 @@ const JobDetails = () => {
     const userRole = localStorage.getItem('role');
     const token = localStorage.getItem('token');
     const { id } = useParams();
+
+    const navigate =useNavigate();
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/v1/job/${id}`, {
@@ -34,10 +36,8 @@ const JobDetails = () => {
 
     const onApplyHandler = () => {
         setLoading(true);
-        setTimeout(() => {
-            alert("You have successfully applied for this job!");
+          navigate(`/applyjob/${id}`);
             setLoading(false);
-        }, 2000);
     };
     
     return (

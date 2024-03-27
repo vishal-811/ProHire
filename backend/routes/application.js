@@ -1,34 +1,41 @@
+const multer = require('multer');
+const upload = multer().single('resume');
 const express = require('express');
 const {Job, User, Application} =require('../database/index');
 const { authMiddleware } = require('../middleware/auth');
 const cloudinary =require('cloudinary');
 const router =express.Router();
 
+
 // Route to post the application by the Job seeker
-router.post('/post',authMiddleware , async(req,res)=>{
+router.post('/post',authMiddleware , upload, async(req,res)=>{
       const id =req.userId;
       const userRole = await User.findById(id);
       if(userRole.role==='Employer'){
         return res.status(411).json({msg:"You are not allowed to access this resource"});
       }
-      if(!req.files || Object.keys(req.files).length===0){  // when resume file is not provided
+
+      if(!req.file || Object.keys(req.file).length===0){  // when resume file is not provided
            return res.status(401).json({msg:"please upload resume"});
       }
 
-      const { resume } =req.files;
-      const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
-      if(allowedFormats.includes(resume.mimetype)){   //mimetypes means .png , .jpg
+      try {
+        const  resume  =req.file;
+      const allowedFormats = ['image/png', 'image/jpeg', 'image/webp'];
+      if(!allowedFormats.includes(resume.mimetype)){   //mimetypes means .png , .jpg
           return res.status(411).json({msg:"No such files are supported,Please provide .png/.jpg files"})
       }
+        //  console.log(resume.originalname);
+      const cloudinaryResponse =await new Promise((resolve) => {
+        cloudinary.v2.uploader.upload_stream((error, cloudinaryResponse) => {
+            return resolve(cloudinaryResponse);
+        }).end(resume.buffer);
+    });
        
-      const cloudinaryResponse = await cloudinary.uploader.upload(
-           resume.tempFilePath
-      )
-        
       if(!cloudinaryResponse){
         return res.status(411).json({msg:"Resume not uploaded!"})
       }
-
+        // console.log(cloudinaryResponse);
       const {username , email , coverletter ,jobId} = req.body;
       
       const applicantId={
@@ -64,6 +71,10 @@ router.post('/post',authMiddleware , async(req,res)=>{
       });
 
       res.status(200).json({msg:"Application submitted"})
+      } catch (error) {
+          console.error(error);
+          return res.status(411).json({msg:"Something went wrong"})
+      }
 
 })
 
@@ -108,6 +119,7 @@ router.delete('/jobseeker/delete/:id', authMiddleware , async(req,res)=>{
       res.status(200).json({success:true , msg:"Application Deleted!"});
       } catch (error) {
           console.error(error)
+          return res.status(411).json({msg:"Something went wrong"})
       }
 })
 module.exports=router;

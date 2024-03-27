@@ -10,6 +10,8 @@ import EmployerJob from "./pages/EmployerJob";
 import AllJob from './pages/AllJob';
 import JobCard from "./components/JobCard";
 import JobDetails from "./pages/JobDetails";
+import ApplyJob from "./pages/ApplyJob";
+import Myapplication from "./pages/Myapplication";
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/alljobs" element={<AllJob/>}/>
           <Route path="/card" element={<JobCard/>}/>
           <Route path="/jobdetails/:id" element={<JobDetails/>}/>
+          <Route path="/applyjob/:id" element={<ApplyJob/>}/>
+          <Route path="/myapplications" element={<Myapplication/>}/>
          <Route path="*" element={<NotFound/>}/>
      </Routes>   
    </BrowserRouter>

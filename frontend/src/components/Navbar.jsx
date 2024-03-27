@@ -41,9 +41,11 @@ const Navbar = () => {
                 <li className=" hover:text-blue-300">
                     <Link to={'/alljobs'}>All Jobs</Link>
                 </li>
-                <li className=" hover:text-blue-300">
-                    <Link to={'/'}>{userRole === 'Employer' ? 'Applicants Application' : 'My Application'}</Link>
-                </li>
+                <li className="hover:text-blue-300">
+               <Link to={userRole === 'Employer' ? '/applicantsapplication' : '/myapplications'}>
+                   {userRole === 'Employer' ? 'Applicants Application' : 'My Application'}
+               </Link>
+</li>
                 {/* Show only if our userRole is employer */}
                 {userRole === 'Employer' && (
                     <>
