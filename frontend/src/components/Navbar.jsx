@@ -1,12 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from '../assets/logo.png';
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const Navbar = () => {
     const navigate = useNavigate();
     const userRole = localStorage.getItem('role');
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [loggedin , setLoggedin] =useState(false);
+
+    const token =localStorage.getItem('token');
+   useEffect(()=>{
+    if(token){
+        setLoggedin(true);
+    }
+   },[]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
@@ -58,13 +66,21 @@ const Navbar = () => {
                     </>
                 )}
                 <li>
-                    <button onClick={async () => {
+                {loggedin ? <button onClick={async () => {
                         const res = localStorage.clear('token', 'user');
                         navigate('/signin');
                         toast.success('logged out successfully');
                     }} className="text-white bg-red-500 hover:bg-red-600 py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none shadow-md hover:shadow-lg">
                         Logout
+                    </button>:
+                    <button onClick={() => {
+                        navigate('/signin');
+                    }} className="text-white bg-blue-500 hover:bg-blue-600 py-2 px-4 rounded-md transition duration-300 ease-in-out focus:outline-none shadow-md hover:shadow-lg">
+                        Sign In
                     </button>
+}
+
+                  
                 </li>
             </ul>
         </div>
