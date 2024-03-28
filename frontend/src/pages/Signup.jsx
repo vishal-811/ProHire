@@ -7,6 +7,7 @@ import RoleSelector from "../components/Role";
 import Subheading from "../components/Subheading";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify'
 
 const Signup = () => {
     const [username, setUsername] = useState('');
@@ -35,14 +36,16 @@ const Signup = () => {
         // Proceed with signup
         setIsLoading(true); // Set loading state to true when signup starts
         try {
-            const response = await axios.post('http://localhost:3000/api/v1/user/signup', {
+            const response = await axios.post('https://prohire-oxdr.onrender.com/api/v1/user/signup', {
                 username,
                 email,
                 password,
                 role
             });
             if (response.status === 201) {
-                localStorage.setItem("token", response.data.token ,"role",role);
+                localStorage.setItem("token", response.data.token);
+                localStorage.setItem("role", role);
+                
                 navigate('/');
                 console.log(response.data.msg);
             }

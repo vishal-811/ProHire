@@ -24,7 +24,7 @@ const Myapplication = () => {
     // Function to fetch applications
     const fetchApplications = () => {
          if(role === 'Job seeker'){
-            axios.get("http://localhost:3000/api/v1/application/jobseeker/getall", {
+            axios.get("https://prohire-oxdr.onrender.com/api/v1/application/jobseeker/getall", {
                 headers: {
                     Authorization: 'Bearer ' + token
                 }
@@ -36,7 +36,7 @@ const Myapplication = () => {
             });
          }
          else{
-            axios.get("http://localhost:3000/api/v1/application/employer/getall",{
+            axios.get("https://prohire-oxdr.onrender.com/api/v1/application/employer/getall",{
                 headers: {
                     Authorization: 'Bearer ' + token
                 }

@@ -35,7 +35,7 @@ const Signin = () => {
         // Proceed with signin
         setIsLoading(true); // Set loading state to true when signin starts
         try {
-            const response = await axios.post("http://localhost:3000/api/v1/user/signin", {
+            const response = await axios.post("https://prohire-oxdr.onrender.com/api/v1/user/signin", {
                 email,
                 password,
                 role

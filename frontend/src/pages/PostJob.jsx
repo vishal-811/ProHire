@@ -40,7 +40,7 @@ import axios from 'axios'
         setFixedSalary('');
     }
         try {
-            const response =await axios.post("http://localhost:3000/api/v1/job/post",
+            const response =await axios.post("https://prohire-oxdr.onrender.com/api/v1/job/post",
          fixedSalary.length>=4
     ?{
          title,

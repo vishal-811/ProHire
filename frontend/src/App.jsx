@@ -15,10 +15,18 @@ import Myapplication from "./pages/Myapplication";
 import { useEffect, useState } from "react";
 
 function App() {
+          const [loggedin , setLoggedin] = useState(false);
+          const token =localStorage.getItem('token');
+          useEffect(()=>{
+            if(token){
+              setLoggedin(true);
+            } 
+          },[loggedin]);
   return (
   <>
     <BrowserRouter>
      <Routes>  
+       {loggedin && <Route path="/" element={<HomePage/>}/>}
           <Route path="/" element={<HomePage/>}/>
          <Route path='/postjob' element={<PostJob/>}/>
          <Route path ='/signup' element={<Signup/>}/>

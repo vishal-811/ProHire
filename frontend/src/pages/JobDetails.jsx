@@ -19,7 +19,7 @@ const JobDetails = () => {
       })
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/api/v1/job/${id}`, {
+        axios.get(`https://prohire-oxdr.onrender.com/api/v1/job/${id}`, {
             headers: {
                 Authorization: 'Bearer ' + token
             }

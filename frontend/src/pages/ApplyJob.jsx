@@ -43,7 +43,7 @@ const ApplyJob = () => {
     formData.append('jobId', id);
 
     try {
-      const response = await axios.post("http://localhost:3000/api/v1/application/post", formData, {
+      const response = await axios.post("https://prohire-oxdr.onrender.com/api/v1/application/post", formData, {
         headers: {
           Authorization: 'Bearer ' + token,
           'Content-Type': 'multipart/form-data'

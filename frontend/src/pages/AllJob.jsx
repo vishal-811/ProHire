@@ -12,7 +12,7 @@ const AllJob=()=>{
         }
 
         useEffect(() => {
-            axios.get('http://localhost:3000/api/v1/job/getall')
+            axios.get('https://prohire-oxdr.onrender.com/api/v1/job/getall')
                 .then((response) => {
                     if (response.status === 200) {
                         console.log(response.data.allJobs);
