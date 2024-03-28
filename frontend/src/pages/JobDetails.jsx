@@ -9,8 +9,14 @@ const JobDetails = () => {
     const userRole = localStorage.getItem('role');
     const token = localStorage.getItem('token');
     const { id } = useParams();
-
     const navigate =useNavigate();
+
+    
+    useEffect(()=>{
+        if(!token){
+          navigate('/signin');
+      }
+      })
 
     useEffect(() => {
         axios.get(`http://localhost:3000/api/v1/job/${id}`, {

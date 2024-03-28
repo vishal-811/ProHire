@@ -98,6 +98,7 @@ router.get('/jobseeker/getall',authMiddleware,async(req,res)=>{
       }
 
       const applications = await Application.find({"applicantId.user":id});
+      console.log(applications);
       res.status(200).json({success:true , applications});
 
 })

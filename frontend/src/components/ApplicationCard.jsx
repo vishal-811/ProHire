@@ -1,30 +1,31 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-const ApplicationCard = ({ username, email, coverletter, appliedon, resumeUrl ,applicationId}) => {
+
+const ApplicationCard = ({ username, email, coverletter, appliedon, resumeUrl ,applicationId, onDelete }) => {
     const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+    const token = localStorage.getItem("token");
+    const role =localStorage.getItem("role");
 
-    const token =localStorage.getItem("token");
-
+    console.log(role);
     const handleOverlayToggle = () => {
         setIsOverlayOpen(!isOverlayOpen);
     };
 
-    const deletehandler=async ()=>{
-         try {
-            const id =applicationId;
-        const response=await axios.delete(`http://localhost:3000/api/v1/application/jobseeker/delete/${id}`,{
-            headers:{
-                authorization:"Bearer "+token
+    const deletehandler = async () => {
+        try {
+            const response = await axios.delete(`http://localhost:3000/api/v1/application/jobseeker/delete/${applicationId}`, {
+                headers: {
+                    authorization: "Bearer " + token
+                }
+            });
+            if (response.status === 200) {
+                toast.success(response.data.msg);
+                onDelete(); // Call onDelete callback to update the applications list
             }
-        })
-       if(response.status===200){
-          toast.success(response.data.msg);
-          navigate('/myapplications');
-       }
-         } catch (error) {
-             toast.error(error.response.data.msg)
-         }
+        } catch (error) {
+            toast.error(error.response.data.msg);
+        }
     }
 
     return (
@@ -60,11 +61,11 @@ const ApplicationCard = ({ username, email, coverletter, appliedon, resumeUrl ,a
                         <img onClick={handleOverlayToggle} src={resumeUrl} className="w-2/4 h-64 cursor-pointer" title="Resume" alt="Resume" />
                     </div>
                 </div>
-                <div className="flex justify-end mt-4">
+                {role ==='Job seeker' ? <div className="flex justify-end mt-4">
                     <button onClick={deletehandler} className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none">
                         Delete
                     </button>
-                </div>
+                </div>:<></>}
             </div>
             {isOverlayOpen && (
                 <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">

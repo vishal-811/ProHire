@@ -43,7 +43,7 @@ const Signup = () => {
             });
             if (response.status === 201) {
                 localStorage.setItem("token", response.data.token ,"role",role);
-                navigate('/signin');
+                navigate('/');
                 console.log(response.data.msg);
             }
         } catch (error) {

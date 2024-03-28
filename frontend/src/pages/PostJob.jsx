@@ -1,6 +1,6 @@
 import LabelInputContainer from "../components/LabelInputContainer";
 import Button from "../components/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
@@ -22,9 +22,6 @@ import axios from 'axios'
 
   const token = localStorage.getItem('token');
   const role =localStorage.getItem('role');
-  if(!token || !role || role!=='Employer'){
-          toast.error("You cannot perform this action")
-  }
 
   const handleSubmit = async() => {
     // e.preventDefault();
@@ -78,6 +75,12 @@ import axios from 'axios'
             toast.error(error.response.data.msg) 
         }
   };
+      useEffect(()=>{
+        if(!token || !role || role!=='Employer'){
+          toast.error("You cannot perform this action")
+          navigate('/signin');
+      }
+      })
   return (
     <div className="flex justify-center items-center bg-slate-700">
       <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">

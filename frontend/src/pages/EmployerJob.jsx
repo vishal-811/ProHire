@@ -10,6 +10,13 @@ const EmployerJob = () => {
     const token = localStorage.getItem('token');
     const [jobs, setJobs] = useState([]);
 
+    useEffect(()=>{
+        if(!token){
+          toast.error("please signin")
+          navigate('/signin');
+      }
+      })
+
     useEffect(() => {
         axios.get('http://localhost:3000/api/v1/job/myposts', {
             headers: {

@@ -42,7 +42,7 @@ const Navbar = () => {
                     <Link to={'/alljobs'}>All Jobs</Link>
                 </li>
                 <li className="hover:text-blue-300">
-               <Link to={userRole === 'Employer' ? '/applicantsapplication' : '/myapplications'}>
+               <Link to={'/myapplications'}>
                    {userRole === 'Employer' ? 'Applicants Application' : 'My Application'}
                </Link>
 </li>

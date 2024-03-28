@@ -12,16 +12,17 @@ import JobCard from "./components/JobCard";
 import JobDetails from "./pages/JobDetails";
 import ApplyJob from "./pages/ApplyJob";
 import Myapplication from "./pages/Myapplication";
+import { useEffect, useState } from "react";
 
 function App() {
   return (
   <>
     <BrowserRouter>
-     <Routes>
+     <Routes>  
           <Route path="/" element={<HomePage/>}/>
-         <Route path="/signup" element={<Signup/>}/>
-         <Route path='/signin' element={<Signin/>}/>
          <Route path='/postjob' element={<PostJob/>}/>
+         <Route path ='/signup' element={<Signup/>}/>
+         <Route path="/signin" element={<Signin/>}/>
          <Route path="/myposts" element={<EmployerJob/>}/>
           <Route path="/alljobs" element={<AllJob/>}/>
           <Route path="/card" element={<JobCard/>}/>

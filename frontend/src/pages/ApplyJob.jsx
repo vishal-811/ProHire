@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState , useEffect } from "react";
 import Heading from "../components/Heading";
 import LabelInputContainer from "../components/LabelInputContainer";
 import axios from "axios";
@@ -15,6 +15,17 @@ const ApplyJob = () => {
   const { id } = useParams();
 
    const navigate =useNavigate();
+
+   useEffect(()=>{
+    if(!token){
+      navigate('/signin');
+  }
+  })
+
+   const role =localStorage.getItem("role");
+   if(role==="Employer"){
+       navigate('/');
+   }
   const handleFileChange = (event) => {
     const resumeFile = event.target.files[0];
     setResume(resumeFile); // Set the file object itself
